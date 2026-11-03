@@ -1,0 +1,35 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  summary     String
+  description String?
+  featured    Boolean  @default(false)
+  tags        String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  ownerId     String?
+  owner       User?    @relation(fields: [ownerId], references: [id])
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  role      Role      @default(MEMBER)
+  createdAt DateTime  @default(now())
+  projects  Project[]
+}

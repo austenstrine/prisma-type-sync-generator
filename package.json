@@ -1,0 +1,49 @@
+{
+	"name": "prisma-type-sync-generator",
+	"version": "0.1.0",
+	"description": "Prisma generator / CLI that emits Swagger-decorated TypeScript model bases and shared types from Prisma models.",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"bin": {
+		"prisma-type-sync-generator": "dist/generator.js",
+		"prisma-type-sync": "dist/cli.js"
+	},
+
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"scripts": {
+		"build": "tsc",
+		"test": "npm run build && ts-node --transpile-only test/emit.test.ts && ts-node --transpile-only test/generate.test.ts",
+		"prepublishOnly": "npm run build"
+	},
+	"peerDependencies": {
+		"prisma": ">=5.0.0"
+	},
+	"dependencies": {
+		"@prisma/generator-helper": "5.19.1",
+		"@prisma/internals": "5.19.1"
+	},
+	"devDependencies": {
+		"@types/node": "^20.16.2",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.5.4"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"keywords": [
+		"prisma",
+		"generator",
+		"swagger",
+		"nestjs",
+		"dto",
+		"typescript"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/austenstrine/prisma-type-sync-generator.git"
+	}
+}
